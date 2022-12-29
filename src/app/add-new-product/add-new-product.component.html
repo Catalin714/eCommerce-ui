@@ -1,0 +1,72 @@
+<div class="container">
+
+    <div class="card p-2">
+        <div class="row">
+            <div class="col-6">
+                <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product name</mat-label>
+                    <input matInput placeholder="Product name" 
+                    [(ngModel)]="product.productName"
+                    name="productName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product description</mat-label>
+                    <input matInput placeholder="Product description"
+                    [(ngModel)]="product.productDescription"
+                    name="productDescription">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product actual price</mat-label>
+                    <input matInput placeholder="Product actual price"
+                    [(ngModel)]="product.productActualPrice"
+                    name="productActualPrice">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Product discounted price </mat-label>
+                    <input matInput placeholder="Product discounted price"
+                    [(ngModel)]="product.productDiscountedPrice"
+                    name="productDiscountedPrice">
+                </mat-form-field>
+
+
+                <div align="end">
+                  <button mat-stroked-button color="primary" style="margin: right 3px;">Clear</button>
+                  <button mat-stroked-button 
+                  color="primary"
+                  type="submit" *ngIf="isNewProduct">Add product </button>
+
+                  <button mat-stroked-button 
+                  color="primary"
+                  type="submit" *ngIf="!isNewProduct">Update product </button>
+               </div>
+            </form>
+            </div>
+
+            <div class="col-6">
+
+                <div>
+
+             <input type="file" multiple value="select" #selectFile
+             (change)="onFileSelected($event)">
+
+
+                </div>
+                
+                <div class="mt-5">
+                    <div class="row">
+                        <mat-grid-list cols="4" rowHeight="1:1">
+                            <mat-grid-tile *ngFor="let file of product.productImages; let i =index;">
+                              <div style="position:relative">
+                                <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+                                <img [src]="file.url" width="100px" height="100px">
+                             </div>
+                        </mat-grid-tile>
+                        </mat-grid-list>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
